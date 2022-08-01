@@ -2,12 +2,13 @@ service: aws-python-http-api-project
 frameworkVersion: '3'
 
 provider:
+  region: ap-northeast-2
   name: aws
   runtime: python3.8
 
 functions:
   hello:
-    handler: handler.hello
+    handler: handler.handler
     events:
       - httpApi:
           path: /

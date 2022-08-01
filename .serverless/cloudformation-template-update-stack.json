@@ -161,9 +161,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-python-http-api-project/dev/1659319163266-2022-08-01T01:59:23.266Z/aws-python-http-api-project.zip"
+          "S3Key": "serverless/aws-python-http-api-project/dev/1659332549201-2022-08-01T05:42:29.201Z/aws-python-http-api-project.zip"
         },
-        "Handler": "handler.hello",
+        "Handler": "handler.handler",
         "Runtime": "python3.8",
         "FunctionName": "aws-python-http-api-project-dev-hello",
         "MemorySize": 1024,
@@ -179,14 +179,14 @@
         "HelloLogGroup"
       ]
     },
-    "HelloLambdaVersionLDnzJqswTtQSOgOvdfGdy14jOhLB0wJrqmNVsqQ6U": {
+    "HelloLambdaVersionwWudjmB7SqFAu5SfFN4JTpWIWDuwv9j0zGM2mxd30w": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "CbOMim9OM8mCdk95EfiBnfSLLZTlf83yvg8aSiIXb3U="
+        "CodeSha256": "9YwGgOb8u54RVGf/JOmE9+E4KIkEcDdJNxz4uwviz7s="
       }
     },
     "HttpApi": {
@@ -297,7 +297,7 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionLDnzJqswTtQSOgOvdfGdy14jOhLB0wJrqmNVsqQ6U"
+        "Ref": "HelloLambdaVersionwWudjmB7SqFAu5SfFN4JTpWIWDuwv9j0zGM2mxd30w"
       },
       "Export": {
         "Name": "sls-aws-python-http-api-project-dev-HelloLambdaFunctionQualifiedArn"
