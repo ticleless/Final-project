@@ -7,8 +7,8 @@
     "provider": {
       "name": "aws",
       "runtime": "python3.8",
+      "region": "ap-northeast-2",
       "stage": "dev",
-      "region": "us-east-1",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
         "AWSTemplateFormatVersion": "2010-09-09",
@@ -173,9 +173,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-python-http-api-project/dev/1659319163266-2022-08-01T01:59:23.266Z/aws-python-http-api-project.zip"
+                "S3Key": "serverless/aws-python-http-api-project/dev/1659333006705-2022-08-01T05:50:06.705Z/aws-python-http-api-project.zip"
               },
-              "Handler": "handler.hello",
+              "Handler": "handler.lambda_handler",
               "Runtime": "python3.8",
               "FunctionName": "aws-python-http-api-project-dev-hello",
               "MemorySize": 1024,
@@ -191,14 +191,14 @@
               "HelloLogGroup"
             ]
           },
-          "HelloLambdaVersionLDnzJqswTtQSOgOvdfGdy14jOhLB0wJrqmNVsqQ6U": {
+          "HelloLambdaVersionfJMYNrbyuG4ENKvdOxyBEUfadeYodGVaxKMA6D4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "CbOMim9OM8mCdk95EfiBnfSLLZTlf83yvg8aSiIXb3U="
+              "CodeSha256": "fj9jqdu3HHuZ3CFh8ywL90e5m11s8AQ/TqOQ2VAkQmc="
             }
           },
           "HttpApi": {
@@ -306,7 +306,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionLDnzJqswTtQSOgOvdfGdy14jOhLB0wJrqmNVsqQ6U"
+              "Ref": "HelloLambdaVersionfJMYNrbyuG4ENKvdOxyBEUfadeYodGVaxKMA6D4"
             },
             "Export": {
               "Name": "sls-aws-python-http-api-project-dev-HelloLambdaFunctionQualifiedArn"
@@ -435,7 +435,7 @@
     "pluginsData": {},
     "functions": {
       "hello": {
-        "handler": "handler.hello",
+        "handler": "handler.lambda_handler",
         "events": [
           {
             "httpApi": {
@@ -452,7 +452,7 @@
         "timeout": 6,
         "runtime": "python3.8",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionLDnzJqswTtQSOgOvdfGdy14jOhLB0wJrqmNVsqQ6U"
+        "versionLogicalId": "HelloLambdaVersionfJMYNrbyuG4ENKvdOxyBEUfadeYodGVaxKMA6D4"
       }
     },
     "configValidationMode": "warn",
@@ -472,7 +472,7 @@
     "artifact": "/Users/choesieun/Desktop/sieun/DevOps/project4/aws-python-http-api-project/.serverless/aws-python-http-api-project.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-python-http-api-project/dev/1659319163266-2022-08-01T01:59:23.266Z",
+    "artifactDirectoryName": "serverless/aws-python-http-api-project/dev/1659333006705-2022-08-01T05:50:06.705Z",
     "artifact": "aws-python-http-api-project.zip"
   }
 }

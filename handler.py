@@ -49,7 +49,7 @@ def put_record_stream(event):
     client = boto3.client('kinesis')
     
     response = client.put_record(
-        StreamName='test-kyy',
+        StreamName='test-stream',
         Data=json.dumps(event),
         PartitionKey=str(uuid.uuid4())
     )
@@ -58,8 +58,8 @@ def put_record_stream(event):
 def lambda_handler(event, context):
 
     data = random_generator()
-    result = put_record_stream(data)
-    
+    print(data)
+    result = put_record_stream(data)  
     print(result)
     return result;
    
