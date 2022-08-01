@@ -5,10 +5,11 @@ provider:
   region: ap-northeast-2
   name: aws
   runtime: python3.8
+  region: ap-northeast-2
 
 functions:
   hello:
-    handler: handler.handler
+    handler: handler.lambda_handler
     events:
       - httpApi:
           path: /
