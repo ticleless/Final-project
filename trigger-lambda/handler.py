@@ -6,7 +6,7 @@ import datetime
     
 #random generator
 def random_generator():
-    valueList = iter([34,39,1000,1015,40,100,400,415])
+    valueList = iter([34,40,1000,1015,40,100,400,415])
     resultList = []
     for x, y in zip(valueList, valueList):
         # print(x,y)
@@ -21,7 +21,7 @@ def random_generator():
                 "lon": -8.61,
                 "lat": 41.15
             },
-        "server_time": datetime.datetime.now(),
+        "server_time": str(datetime.datetime.now()),
             "temperature": resultList[0],
             "pressure": resultList[1],
             "humidity": resultList[2],
