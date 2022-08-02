@@ -2,7 +2,7 @@ import json
 import boto3
 import uuid
 import random
-
+import datetime
     
 #random generator
 def random_generator():
@@ -21,7 +21,7 @@ def random_generator():
                 "lon": -8.61,
                 "lat": 41.15
             },
-        "server_time": "1416895635000",
+        "server_time": datetime.datetime.now(),
             "temperature": resultList[0],
             "pressure": resultList[1],
             "humidity": resultList[2],
