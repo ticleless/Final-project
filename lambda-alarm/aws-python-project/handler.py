@@ -1,6 +1,4 @@
-from email import message
 import json
-from signal import alarm
 import boto3
 import logging
 import os
