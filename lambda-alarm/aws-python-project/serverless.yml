@@ -1,4 +1,4 @@
-service: aws-python-project
+service: s3-lambda
 
 frameworkVersion: '3'
 
@@ -12,5 +12,6 @@ functions:
     handler: handler.lambda_handler
     events:
       - s3:
-          bucket: opensearch-test-kyy
+          bucket: opensearch-backup-kyy
           event: s3:ObjectCreated:*
+          existing: true
