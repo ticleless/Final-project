@@ -3,10 +3,11 @@ import boto3
 import uuid
 import random
 from datetime import datetime
+from pytz import timezone
     
 #random generator
 def random_generator():
-    #temp, pressure, humiditym co2
+    #temp, pressure, humidity, co2
     valueList = iter([34,40,1000,1015,40,100,400,415])
     resultList = []
     for x, y in zip(valueList, valueList):
@@ -22,7 +23,7 @@ def random_generator():
                 "lon": -8.61,
                 "lat": 41.15
             },
-        "server_time": datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
+        "server_time": datetime.now(timezone('Asia/Seoul')).strftime('%Y-%m-%d %H:%M:%S'),
             "temperature": resultList[0],
             "pressure": resultList[1],
             "humidity": resultList[2],
