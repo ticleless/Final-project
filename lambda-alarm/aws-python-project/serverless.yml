@@ -6,6 +6,13 @@ provider:
   region: ap-northeast-2
   name: aws
   runtime: python3.8
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "lambda:*"
+        - "S3:*"
+      Resource:
+        - "*"
 
 functions:
   hello:
