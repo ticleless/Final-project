@@ -21,7 +21,7 @@ def random_generator():
     #lon,lat Busan, Incheon, Gawngju, Daejon, Jeju
     coordList = [[129.075,35.18],[126.97,37.57],[127.25,37.43],[128.10,35.19],[126.71,35.96]]
     #Busan, Incheon, Gawngju, Daejon, Jeju
-    mapList = ["KR-26","KR-28","KR-29","KR-30","KR-49"]
+    mapList = ["Busan","Incheon","Gwangju","Daejeon","Jeju"]
     randomValue = random.randrange(0,5)
     coordValue = coordList[randomValue]
     
