@@ -18,8 +18,11 @@ class DateTimeEncoder(JSONEncoder):
 
 #random generator
 def random_generator():
+    #lon,lat Ulsan, Masan GawngJu YangYang Yeosu
+    coordList = [[129.33,35.57],[128.58,35.22],[128.62,38.07],[126.90,35.18],[127.66,34.75]]
+    coordValue = coordList[random.randrange(0,5)]
     #temp, pressure, humidity, co2
-    valueList = iter([34,40,1000,1015,40,100,400,415])
+    valueList = iter([30,40,950,1015,40,100,370,415])
     resultList = []
     for x, y in zip(valueList, valueList):
         # print(x,y)
@@ -33,8 +36,8 @@ def random_generator():
         "error_code": "0",
         "device_id": "39278391",
             "coord": {
-                "lon": -8.61,
-                "lat": 41.15
+                "lon": coordValue[0],
+                "lat": coordValue[1]
             },
         "server_time": now,
             "temperature": resultList[0],
@@ -43,10 +46,10 @@ def random_generator():
             "co2": resultList[3],
     }
 
-    employeeJSONData = json.dumps(data, cls=DateTimeEncoder)
+    encodingJsonData = json.dumps(data, cls=DateTimeEncoder)
     
 
-    return employeeJSONData
+    return encodingJsonData
         
 #put record on stream
 def put_record_stream(event):
