@@ -18,9 +18,13 @@ class DateTimeEncoder(JSONEncoder):
 
 #random generator
 def random_generator():
-    #lon,lat Ulsan, Masan GawngJu YangYang Yeosu
-    coordList = [[129.33,35.57],[128.58,35.22],[128.62,38.07],[126.90,35.18],[127.66,34.75]]
-    coordValue = coordList[random.randrange(0,5)]
+    #lon,lat Busan, Incheon, Gawngju, Daejon, Jeju
+    coordList = [[129.075,35.18],[126.97,37.57],[127.25,37.43],[128.10,35.19],[126.71,35.96]]
+    #Busan, Incheon, Gawngju, Daejon, Jeju
+    mapList = ["KR-26","KR-28","KR-29","KR-30","KR-49"]
+    randomValue = random.randrange(0,5)
+    coordValue = coordList[randomValue]
+    
     #temp, pressure, humidity, co2
     valueList = iter([30,40,950,1015,40,100,370,415])
     resultList = []
@@ -39,6 +43,7 @@ def random_generator():
                 "lon": coordValue[0],
                 "lat": coordValue[1]
             },
+        "dst": mapList[randomValue],
         "server_time": now,
             "temperature": resultList[0],
             "pressure": resultList[1],
