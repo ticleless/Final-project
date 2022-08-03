@@ -2,9 +2,20 @@ import json
 import boto3
 import uuid
 import random
-from datetime import datetime
-from pytz import timezone
-    
+import datetime
+import dateutil.tz
+import json
+from json import JSONEncoder
+
+
+#Json Encoding
+class DateTimeEncoder(JSONEncoder):
+        #Override the default method
+        def default(self, obj):
+            if isinstance(obj, (datetime.date, datetime.datetime)):
+                return obj.isoformat()
+
+
 #random generator
 def random_generator():
     #temp, pressure, humidity, co2
@@ -15,6 +26,8 @@ def random_generator():
         result = random.randrange(x,y)
         resultList.append(result)
         # print(result)
+    eastern = dateutil.tz.gettz('Asia/Seoul')
+    now = datetime.datetime.now(tz=eastern)
     data = {
         "result": "success",
         "error_code": "0",
@@ -23,13 +36,17 @@ def random_generator():
                 "lon": -8.61,
                 "lat": 41.15
             },
-        "server_time": datetime.now(timezone('Asia/Seoul')).strftime('%Y-%m-%d %H:%M:%S'),
+        "server_time": now,
             "temperature": resultList[0],
             "pressure": resultList[1],
             "humidity": resultList[2],
             "co2": resultList[3],
     }
-    return data
+
+    employeeJSONData = json.dumps(data, cls=DateTimeEncoder)
+    
+
+    return employeeJSONData
         
 #put record on stream
 def put_record_stream(event):
@@ -37,7 +54,7 @@ def put_record_stream(event):
     client = boto3.client('kinesis')
     response = client.put_record(
         StreamName='test-stream',
-        Data=json.dumps(event),
+        Data=event,
         PartitionKey=str(uuid.uuid4())
     )
     return response
