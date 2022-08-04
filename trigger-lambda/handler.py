@@ -4,9 +4,18 @@ import uuid
 import random
 import datetime
 import dateutil.tz
-import json
+import logging
+import os
+
+from base64 import b64decode
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
 from json import JSONEncoder
 
+HOOK_URL = os.environ['HOOK_URL']
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 #Json Encoding
 class DateTimeEncoder(JSONEncoder):
@@ -55,6 +64,34 @@ def random_generator():
     
 
     return encodingJsonData
+
+def payload_alarm():
+    discord_message = {
+            'username': 'TeamD Error',
+            'avatar_url': 'https://i.imgur.com/4M34hi2.png',
+            'content': 'Payload is null'
+        }
+        
+    payload = json.dumps(discord_message).encode('utf-8')
+
+    headers = {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Length': len(payload),
+        'Host': 'discord.com',
+        'user-agent': 'Mozilla/5.0'
+    }
+
+    req = Request(HOOK_URL, payload, headers)
+
+    try:
+        response = urlopen(req)
+        response.read()
+        logger.info("Message posted to discord")
+    except HTTPError as e:
+        logger.error("Request failed: %d %s", e.code, e.reason)
+        logger.error(e.read())
+    except URLError as e:
+        logger.error("Server connection failed: %s", e.reason)
         
 #put record on stream
 def put_record_stream(event):
