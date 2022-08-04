@@ -18,39 +18,49 @@ s3_client = boto3.client('s3')
 def discord_alarm(data, attribute):
     logger.info("Event: " + str(data))
 
+    username = "TeamD SmartFarm"
+    message_coord = data["dst"]
+    message_attribute = '온도'
+    content_message = f'[경보] {message_coord} {message_attribute} 기준치 초과!'
+
+
 
     discord_message = {
-        'username': 'TeamD',
+        'username': username,
         'avatar_url': 'https://i.imgur.com/4M34hi2.png',
         'content': 'test'
     }
     
     if attribute == 'temperature':
+        message_temperature = f'현재 온도: {data["temperature"]}도'
+        message_attribute = '온도'
         discord_message = {
-        'username': 'TeamD',
-        'avatar_url': 'https://i.imgur.com/4M34hi2.png',
-        'content': f'temperature is {data["temperature"]}'
+        'username': username,
+        'content': content_message + message_temperature
         }
     
     if attribute == 'pressure':
+        message_pressure = f'현재 기압: {data["pressure"]}hPa'
+        message_attribute = "기압"
         discord_message = {
-        'username': 'TeamD',
-        'avatar_url': 'https://i.imgur.com/4M34hi2.png',
-        'content': f'pressure is {data["pressure"]}'
+        'username': username,
+        'content': content_message + message_pressure
         }
     
     if attribute == 'humidity':
+        message_humidity = f'현재 습도: {data["humidity"]}%'
+        message_attribute = "습도"
         discord_message = {
-        'username': 'TeamD',
-        'avatar_url': 'https://i.imgur.com/4M34hi2.png',
-        'content': f'humidity is {data["humidity"]}'
+        'username': username,
+        'content': content_message + message_humidity
         }
     
     if attribute == 'co2':
+        message_co2 = f'현재 Co2 농도: {data["co2"]}ppm'
+        message_attribute = "Co2 농도"
         discord_message = {
-        'username': 'TeamD',
-        'avatar_url': 'https://i.imgur.com/4M34hi2.png',
-        'content': f'co2 is {data["co2"]}'
+        'username': username,
+        'content': content_message + message_co2
         }
 
 
@@ -86,19 +96,19 @@ def lambda_handler(event, context):
     response = s3_client.get_object(Bucket=bucket_name, Key=s3_key)
     print(response)
     data = response['Body'].read()
+    print(data, 'data')
     load_data = json.loads(data)
+
     
     temperature = load_data["temperature"]
     pressure = load_data["pressure"]
     humidity= load_data["humidity"]
     co2 = load_data["co2"]
     
-    temperature_value = 38
-    pressure_value = 1010
+    temperature_value = 31
+    pressure_value = 900
     humidity_value = 85
     co2_value = 410
-
-    print(data)
 
     if temperature > temperature_value:
         discord_alarm(load_data, 'temperature')
