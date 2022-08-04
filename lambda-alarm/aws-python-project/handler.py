@@ -19,52 +19,32 @@ def discord_alarm(data, attribute):
     logger.info("Event: " + str(data))
 
     username = "TeamD SmartFarm"
+    icon_url = 'https://i.postimg.cc/SxLZSrt1/movie-image.jpg'
     message_coord = data["dst"]
-    message_attribute = '온도'
+    
+    if attribute == 'temperature':
+        message = f'현재 온도: {data["temperature"]}도'
+        message_attribute = '온도'
+    
+    elif attribute == 'pressure':
+        message = f'현재 기압: {data["pressure"]}hPa'
+        message_attribute = "기압"
+    
+    elif attribute == 'humidity':
+        message = f'현재 습도: {data["humidity"]}%'
+        message_attribute = "습도"
+    
+    elif attribute == 'co2':
+        message = f'현재 Co2 농도: {data["co2"]}ppm'
+        message_attribute = "Co2 농도"
+        
     content_message = f'[경보] {message_coord} {message_attribute} 기준치 초과!'
-
-
 
     discord_message = {
         'username': username,
-        'avatar_url': 'https://i.imgur.com/4M34hi2.png',
-        'content': 'test'
-    }
-    
-    if attribute == 'temperature':
-        message_temperature = f'현재 온도: {data["temperature"]}도'
-        message_attribute = '온도'
-        discord_message = {
-        'username': username,
-        'content': content_message + message_temperature
+        'avatar_url': icon_url,
+        'content': content_message + ' ' + message
         }
-    
-    if attribute == 'pressure':
-        message_pressure = f'현재 기압: {data["pressure"]}hPa'
-        message_attribute = "기압"
-        discord_message = {
-        'username': username,
-        'content': content_message + message_pressure
-        }
-    
-    if attribute == 'humidity':
-        message_humidity = f'현재 습도: {data["humidity"]}%'
-        message_attribute = "습도"
-        discord_message = {
-        'username': username,
-        'content': content_message + message_humidity
-        }
-    
-    if attribute == 'co2':
-        message_co2 = f'현재 Co2 농도: {data["co2"]}ppm'
-        message_attribute = "Co2 농도"
-        discord_message = {
-        'username': username,
-        'content': content_message + message_co2
-        }
-
-
-    
 
     payload = json.dumps(discord_message).encode('utf-8')
 
