@@ -22,40 +22,18 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
-
-# resource "aws_s3_bucket" "lambda_bucket" {
-#   bucket_prefix = var.s3_bucket_prefix
-#   force_destroy = true
-# }
-
-# resource "aws_s3_bucket_acl" "private_bucket" {
-#   bucket = aws_s3_bucket.lambda_bucket.id
-#   acl    = "private"
-# }
-
 data "archive_file" "lambda_zip" {
   type = "zip"
 
-  source_dir  = "${path.module}/../trigger-lambda/handler.py"
+  source_file  = "../trigger-lambda/handler.py"
   output_path = "${path.module}/handler.zip"
 }
-
-# resource "aws_s3_object" "lambda_app" {
-#   bucket = aws_s3_bucket.lambda_bucket.id
-
-#   key    = "source.zip"
-#   source = data.archive_file.lambda_zip.output_path
-
-#   etag = filemd5(data.archive_file.lambda_zip.output_path)
-# }
 
 //Define lambda function
 resource "aws_lambda_function" "app" {
   function_name = "trigger-lambda"
   description = "trigger-lambda"
-
-#   s3_bucket = aws_s3_bucket.lambda_bucket.id
-#   s3_key    = aws_s3_object.lambda_app.key
+  filename      = data.archive_file.lambda_zip.output_path
 
   runtime = "python3.9"
   handler = "handler.lambda_handler"
@@ -161,7 +139,7 @@ resource "aws_apigatewayv2_route" "any" {
 resource "aws_cloudwatch_log_group" "api_gw" {
   name = "/aws/api_gw/${aws_apigatewayv2_api.lambda.name}"
 
-  retention_in_days = var.apigw_log_retention
+  retention_in_days = 7
 }
 
 resource "aws_lambda_permission" "api_gw" {
@@ -171,4 +149,10 @@ resource "aws_lambda_permission" "api_gw" {
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
+}
+
+resource "aws_iam_role_policy_attachment" "terraform_lambda_iam_policy_kinesis_execution" {
+  role = "${aws_iam_role.lambda_exec.id}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonKinesisFullAccess"
+
 }

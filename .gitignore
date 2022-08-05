@@ -18,4 +18,10 @@ var/
 
 # Serverless directories
 .serverless
+
+# terraform
 .terraform
+*.zip
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
