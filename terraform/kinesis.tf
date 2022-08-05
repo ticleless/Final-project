@@ -23,7 +23,7 @@ resource "aws_kinesis_stream" "test_stream" {
 
 resource "aws_opensearch_domain" "test_cluster" {
   domain_name = "opensearch"
-  engine_version = "Elasticsearch_7.10"
+  engine_version = "OpenSearch_1.3"
   
   ebs_options {
     ebs_enabled = true
@@ -185,7 +185,7 @@ EOF
                     "kms:ViaService": "kinesis.ap-northeast-2.amazonaws.com"
                 },
                 "StringLike": {
-                    "kms:EncryptionContext:aws:kinesis:arn": "arn:aws:kinesis:ap-northeast-2:256854238025:stream/test-kyy"
+                    "kms:EncryptionContext:aws:kinesis:arn": "arn:aws:kinesis:ap-northeast-2:*"
                 }
             }
         }
