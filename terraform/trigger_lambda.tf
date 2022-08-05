@@ -42,6 +42,12 @@ resource "aws_lambda_function" "app" {
 
   role = aws_iam_role.lambda_exec.arn
   depends_on = [aws_cloudwatch_log_group.lambda_log]
+
+  environment {
+    variables = {
+      HOOK_URL = data.external.env.result["HOOKURL"]
+    }
+  }
 }
 
 resource "aws_cloudwatch_log_group" "lambda_log" {
@@ -156,3 +162,7 @@ resource "aws_iam_role_policy_attachment" "terraform_lambda_iam_policy_kinesis_e
   policy_arn = "arn:aws:iam::aws:policy/AmazonKinesisFullAccess"
 
 }
+
+data "external" "env" { 
+  program = ["${path.module}/env.sh"] 
+} 
