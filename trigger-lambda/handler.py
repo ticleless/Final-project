@@ -98,7 +98,7 @@ def put_record_stream(event):
 
     client = boto3.client('kinesis')
     response = client.put_record(
-        StreamName='test-kyy',
+        StreamName='data-stream',
         Data=event,
         PartitionKey=str(uuid.uuid4())
     )
