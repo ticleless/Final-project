@@ -2,7 +2,7 @@ data "aws_region" "current" {}
 
 data "aws_caller_identity" "current" {}
 
-
+# S3 BackUp Stroage
 resource "aws_s3_bucket" "main" {
   bucket = "backup-s3-teamd"
 
@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "main" {
   }
 }
 
-
+#Kinesis Data Stream
 resource "aws_kinesis_stream" "test_stream" {
   name             = "data-stream"
   shard_count      = 1
@@ -25,7 +25,7 @@ resource "aws_kinesis_stream" "test_stream" {
     stream_mode = "PROVISIONED"
   }
 }
-
+#Kinesis Log Group
 resource "aws_cloudwatch_log_group" "s3backuplog" {
   name = "/aws/s3/firehose_to_s3"
 
@@ -44,6 +44,7 @@ resource "aws_cloudwatch_log_stream" "opensearchstream" {
   name           = "/aws/opensearch/firehose_to_opensearch_stream"
   log_group_name = aws_cloudwatch_log_group.opensearchlog.name
 }
+#Kinesis Firehose 
 resource "aws_kinesis_firehose_delivery_stream" "test_stream" {
   name        = "firehose-opensearch"
   destination = "elasticsearch"

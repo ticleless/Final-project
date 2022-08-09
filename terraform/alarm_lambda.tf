@@ -16,7 +16,7 @@ module "lambda" {
 
   local_existing_package = "${data.archive_file.alarm_lambda_zip.output_path}"
   environment_variables = {
-      HOOK_URL = data.external.env.result["HOOKURL"]
+      HOOK_URL = var.HookUrl
   }
  
     tags = {
