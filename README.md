@@ -21,7 +21,7 @@
 4. 명령줄에서 terraform을 사용하여 tf 파일에 구성된 대로 AWS 리소스를 배포합니다.
 배포 완료까지는 약 15분 소요 될 수 있습니다.
     ```
-    terraform deploy
+    terraform apply
     ```
 5. Deploy가 완료되면 AWS Management Console에서 Amazon OpenSearch Service로 접속합니다.
 
