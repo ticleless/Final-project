@@ -70,9 +70,9 @@ Terraform
     ```
     terraform apply
     ```
-5. Deploy가 완료되면 AWS Management Console에서 Amazon OpenSearch Service로 접속합니다.
+5. Deploy가 완료되면 AWS Management Console에서 Amazon OpenSearch Service로 접속합니다. ID: admin PW: #Devops02
 
-6. 배포된 도메인에 해당하는 OpenSearch Dash board URL로 접속합니다.
+6. 배포된 도메인에 해당하는 OpenSearch Dash board URL로 접속합니다. 
 
 7. user가 OpenSearch 클러스터와 인덱스에 접근할 수 있도록 하는 권한을 부여하기 위해 먼저 Role을 생성합니다.
 ![role](https://user-images.githubusercontent.com/78151046/184048274-9f26076b-eedb-4afe-8376-2c7e23b0b6da.jpg)
@@ -83,7 +83,7 @@ Terraform
     
     - Cluster permissions - `cluster_all`, `indices_all` 부여 
     
-    - Index permissions - index에는 `*` 삽입, Index permissions는 Cluster            permissons와 동일하게 권한 부여
+    - Index permissions - index에는 `*` 삽입, Index permissions는 Cluster permissons와 동일하게 권한 부여
     - 나머지 항목은 무시합니다.
 8. Role이 생성되면 생성된 Role을 user에 매핑해줘야 함니다.
 ![mapping](https://user-images.githubusercontent.com/78151046/184048300-30622a82-343b-481c-b2f7-8bcd390bea64.jpg)
@@ -92,8 +92,8 @@ Terraform
     - Users에 자신이 사용하는 AWS user(사용자) ARN을 삽입합니다. 추가적으로  다른 IAM 사용자도 DashBoard를 구성한다면 그 사용자의 ARN도 삽입합니다.
     - Backend roles는 AWS IAM에서 새로운 역할을 `AmazonOpenSearchFullAccess` 정책을 추가하여 만들고 새로 구성된 Role ARN을 Backend roles에 삽입합니다.
 
-## Index Mapping
-OpenSearch Dashboard - Dev tool로 이동하여 아래의 코드를 붙여넣고 실행합니다. `geo_point` data type이 자동으로 매핑되지 않기 때문에 인덱스에 매핑 되기 전 직접 전체 매핑을 해줘야 합니다. `weather`는 변경 가능한 인덱스 명입니다.
+## Indexing
+OpenSearch Dashboard - Dev tool로 이동하여 아래의 코드를 붙여넣고 실행합니다. `geo_point` data type이 자동으로 매핑되지 않기 때문에 인덱스에 매핑 되기 전 직접 전체 매핑을 해줘야 합니다.
 ```
 PUT /weather
 {
