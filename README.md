@@ -46,7 +46,7 @@
     - Backend roles는 AWS IAM에서 새로운 역할을 `AmazonOpenSearchFullAccess` 정책을 추가하여 만들고 새로 구성된 Role ARN을 Backend roles에 삽입합니다.
 
 ## 인덱스 생성 및 매핑
-OpenSearch Dashboard - Dev tool로 이동하여 아래의 코드를 붙여넣고 실행합니다. `geo_point` data type이 자동으로 매핑되지 않기 때문에 인덱스에 매핑 되기 전 직접 전체 매핑을 해줘야 합니다. `weather`는 변경 가능한 인덱스 명입니다.
+OpenSearch Dashboard - Dev tool로 이동하여 아래의 코드를 붙여넣고 실행합니다. `geo_point` data type이 자동으로 매핑되지 않기 때문에 인덱스에 매핑 되기 전 직접 전체 매핑을 해줘야 합니다.
 ```
 PUT /weather
 {
