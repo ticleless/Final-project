@@ -113,7 +113,7 @@ Create index pattern을 클릭하고 위의 코드에서 넣었던 인덱스 명
 올바르게 데이터 타입이 들어갔는지 확인합니다.
 
 ## How it works
-API Gateway 엔드포인트로 GET요청을 보내게 되면 Lambda가 트리거되어 Kinesis Data Stream으로 메세지를 전송합니다. Data Stream을 수신하고 있는 Firehose는 Data Stream의 데이터를 받아 OpenSearch로 전송을 해주고 또한 데이터를 S3에 백업합니다. 데이터가 OpenSearch에 도착하면 OpenSearch Dashboard를 통해 데이터를 시각화하게 됩니다.
+API Gateway 엔드포인트로 GET요청을 보내게 되면 Lambda가 트리거되어 Kinesis Data Stream으로 메세지를 전송합니다. Data Stream을 수신하고 있는 Firehose는 Data Stream의 데이터를 받아 OpenSearch로 전송을 해주고 또한 데이터를 S3에 백업합니다. S3에 데이터가 쌓이면 디스코드 알람을 전송하는 Lambda가 트리거되어 데이터의 값이 기준치를 초과하면 알람을 보내게 됩니다. 데이터가 OpenSearch에 도착하면 OpenSearch Dashboard를 통해 데이터를 시각화하게 됩니다.
 
 ## Testing
 ![test](https://user-images.githubusercontent.com/78151046/184051204-38895242-8d08-4f33-8cdd-56a3d4f5bdc8.jpg)
