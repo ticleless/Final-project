@@ -23,9 +23,9 @@
     ```
     terraform apply
     ```
-5. Deploy가 완료되면 AWS Management Console에서 Amazon OpenSearch Service로 접속합니다.
+5. Deploy가 완료되면 AWS Management Console에서 Amazon OpenSearch Service로 접속합니다. ID: admin PW: #Devops02
 
-6. 배포된 도메인에 해당하는 OpenSearch Dash board URL로 접속합니다.
+6. 배포된 도메인에 해당하는 OpenSearch Dash board URL로 접속합니다. 
 
 7. user가 OpenSearch 클러스터와 인덱스에 접근할 수 있도록 하는 권한을 부여하기 위해 먼저 Role을 생성합니다.
 ![role](https://user-images.githubusercontent.com/78151046/184048274-9f26076b-eedb-4afe-8376-2c7e23b0b6da.jpg)
@@ -36,7 +36,7 @@
     
     - Cluster permissions - `cluster_all`, `indices_all` 부여 
     
-    - Index permissions - index에는 `*` 삽입, Index permissions는 Cluster            permissons와 동일하게 권한 부여
+    - Index permissions - index에는 `*` 삽입, Index permissions는 Cluster permissons와 동일하게 권한 부여
     - 나머지 항목은 무시합니다.
 8. Role이 생성되면 생성된 Role을 user에 매핑해줘야 함니다.
 ![mapping](https://user-images.githubusercontent.com/78151046/184048300-30622a82-343b-481c-b2f7-8bcd390bea64.jpg)
