@@ -111,3 +111,21 @@ PUT /weather
 Create index pattern을 클릭하고 위의 코드에서 넣었던 인덱스 명을 선택해 인덱스 패턴을 생성합니다.
 
 올바르게 데이터 타입이 들어갔는지 확인합니다.
+
+## How it works
+API Gateway 엔드포인트로 GET요청을 보내게 되면 Lambda가 트리거되어 Kinesis Data Stream으로 메세지를 전송합니다. Data Stream을 수신하고 있는 Firehose는 Data Stream의 데이터를 받아 OpenSearch로 전송을 해주고 또한 데이터를 S3에 백업합니다. 데이터가 OpenSearch에 도착하면 OpenSearch Dashboard를 통해 데이터를 시각화하게 됩니다.
+
+## Testing
+![test](https://user-images.githubusercontent.com/78151046/184051204-38895242-8d08-4f33-8cdd-56a3d4f5bdc8.jpg)
+
+
+API gateway로 GET 요청을 보내게되면 해당 스크린샷과 같은 로그가 출력되고 약 1~2분뒤 OpenSearch Dashboard에서 데이터가 시각화되어 나타나는 것을 확인 할 수 있다.
+
+## Clean up
+S3 버킷에 데이터가 남아있는 경우 삭제되지 않으므로 버킷 비우기를 한 다음 Clean up을 진행합니다.
+
+terraform 디렉토리에 접근 후 해당 명령어를 입력합니다.
+Clean up 또한 약 10여분 걸릴 수 있습니다.
+```
+terraform destroy
+```
